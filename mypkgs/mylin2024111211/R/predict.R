@@ -7,5 +7,7 @@
 #' @export
 predict <- function(model, newdata) {
   x_new <- cbind(1, newdata)
-  return(x_new %*% model$coefficients)
+  # conver x_new to numerical
+  x_new_mat <- as.matrix(x_new)
+  return(x_new_mat %*% model$coefficients)
 }

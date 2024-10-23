@@ -6,10 +6,18 @@
 #' @return return a list consist of coefficiences and formula
 #' @export
 lin_reg <- function(formula, data) {
-  x <- model.matrix(formula, data)[, -1]
-  y <- data[[as.character(formula[[2]])]]
-  coef <- solve(t(x) %*% x) %*% t(x) %*% y
-  list(coefficients = coef, formula = formula)
+  m <- model.matrix(formula, data)
+  y <- model.response(model.frame(formula, data))
+  # Solve for coefficients using least squares
+  coef <- solve(crossprod(m), crossprod(m, y))
+  # Create a list that holds the model information
+  model <- list(coefficients = coef,
+                residuals = y - m %*% coef,
+                call = match.call(),
+                terms = terms(formula),
+                rank = length(coef))
+  class(model) <- "mylin"
+  return(model)
 }
 
 #' Linear Regression Model

@@ -4,12 +4,48 @@
 \alias{lin_reg}
 \title{Linear Regression Model}
 \usage{
-lin_reg(formula, data)
+lin_reg(
+  formula,
+  data,
+  subset,
+  weights,
+  na.action,
+  method = "qr",
+  model = TRUE,
+  return_x = FALSE,
+  return_y = FALSE,
+  qr = TRUE,
+  singular.ok = TRUE,
+  contrasts = NULL,
+  offset
+)
 }
 \arguments{
-\item{formula}{describle model formula}
+\item{formula}{describle model formula, such as y ~ x}
 
-\item{data}{data build from data.frame}
+\item{data}{data build from data.frame, such as data.frame(x = x, y = y)}
+
+\item{subset}{none}
+
+\item{weights}{none}
+
+\item{na.action}{none}
+
+\item{method}{which method is used to fit linear model.}
+
+\item{model}{whether return a model class.}
+
+\item{return_x}{whether need to return designer matrix. default False}
+
+\item{return_y}{whether need to return response variable . default False}
+
+\item{qr}{none}
+
+\item{singular.ok}{none}
+
+\item{contrasts}{none}
+
+\item{offset}{none}
 }
 \value{
 return a list consist of coefficiences and formula

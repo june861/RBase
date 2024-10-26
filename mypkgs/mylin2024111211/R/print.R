@@ -1,10 +1,14 @@
-#' Linear Regression Model
+#' Print a Simple Linear Regression Model Summary
 #'
-#' @description train a linear model
-#' @param model the model you want to display
-#' @return return a list consist of coefficiences and formula
+#' Prints a summary of a simple linear regression model.
+#'
+#' @param x An object of class "mylin".
+#' @param ... Additional arguments.
 #' @export
-print.lm <- function(model) {
+print.mylin <- function(x, ...) {
+  cat("\nCall:\n", deparse(x$call), "\n\n")
   cat("Coefficients:\n")
-  print(model$coefficients)
+  print.default(format(x$coefficients), print.gap = 2L, quote = FALSE)
+  cat("\n")
+  invisible(x)
 }

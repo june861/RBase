@@ -1,17 +1,3 @@
-#' Linear Regression Model
-#'
-#' @description train a linear model
-#' @param formula describle model formula, such as y ~ x
-#' @param data data build from data.frame, such as data.frame(x = x, y = y)
-#' @param subset Specify a subset, such as fitting only the portion of
-#'              data greater than 0 in the dataset.
-#' @param  save_model whether save model. Default TRUE
-#' @param weights Optional vector of case weights.
-#' @param na.action Function indicating what should happen when the data contain NAs.
-#'                  default na.fail, optional is [na.omit, ]
-#' @param model_save_path User define the model save path.
-#' @return return a list consist of coefficiences and formula
-#' @export
 lin_reg <- function(formula, data, subset, save_model = TRUE,
                     weights = NULL, na.action = na.fail,
                     model_save_path = NULL, ...) {
@@ -75,3 +61,10 @@ lin_reg <- function(formula, data, subset, save_model = TRUE,
 
   model
 }
+
+# 创建一些数据
+x <- rnorm(100)
+y <- 20 * x + 23 + rnorm(100)
+
+# 使用 lin_reg 训练模型
+model <- lin_reg(y ~ x, data = data.frame(x = x, y = y))

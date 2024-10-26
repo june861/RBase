@@ -1,13 +1,19 @@
-#' Predict via Linear Regression Model
+#' Predict from a Simple Linear Regression Model
 #'
-#' @description train a linear model
-#' @param model describle model formula
-#' @param newdata build from data.frame
-#' @return return a list consist of coefficiences and formula
+#' Predict new responses given the regression model and new input values.
+#'
+#' @param object An object of class "mylin".
+#' @param newdata A data frame or matrix of new input values.
+#' @param ... Additional arguments.
+#' @return A vector of predicted values.
 #' @export
-predict <- function(model, newdata) {
-  x_new <- cbind(1, newdata)
-  # conver x_new to numerical
-  x_new_mat <- as.matrix(x_new)
-  return(x_new_mat %*% model$coefficients)
+predict.mylin <- function(object, newdata, ...) {
+  # Extract the coefficients
+  coef <- object$coefficients
+  # Create the model matrix for the new data
+  mm <- model.frame(object$terms, newdata)
+  x <- model.matrix(object$terms, mm)
+  # Compute predictions 
+  predict <- x %*% coef
+  predict
 }
